@@ -1,0 +1,22 @@
+﻿@inject ClickState ClickState
+@implements IDisposable
+
+<h3>@ClickState.ClickName</h3>
+<button class="btn btn-primary" @onclick="Change">Blazor Click!</button>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ClickState.AddStateChangeListener(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        ClickState.RemoveStateChangeListener(() => StateHasChanged());
+    }
+
+    public void Change()
+    {
+        ClickState.SetClickName("Blazor Clicked!");
+    }
+}

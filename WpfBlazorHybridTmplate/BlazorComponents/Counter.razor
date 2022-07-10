@@ -1,0 +1,19 @@
+﻿@inject CounterState CounterState
+@implements IDisposable
+
+<div style="display:flex; flex-direction:column;justify-content: center;">
+    <h3 style="text-align: center;">@CounterState.Count</h3>
+    <button class="btn btn-primary" @onclick="CounterState.IncreamentCount">Change</button>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        CounterState.AddStateChangeListener(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        CounterState.RemoveStateChangeListener(() => StateHasChanged());
+    }
+}
